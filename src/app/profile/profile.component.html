@@ -1,0 +1,41 @@
+@defer {
+<ion-content class="flex h-full w-full justify-center p-4">
+  <ion-col
+    class="swipe-card rounded-2xl w-full md:w-80 h-full md:h-[40rem] flex md:flex-row"
+  >
+    <ion-card-content
+      class="!p-0 relative drop-shadow-lg gap-2 md:gap-0 flex flex-col"
+    >
+      <span class="absolute p-2">
+        <ion-button
+          class="flex w-8 justify-center cursor-pointer bg-white rounded-lg"
+          (click)="back()"
+        >
+          <mat-icon>keyboard_backspace</mat-icon>
+        </ion-button>
+      </span>
+
+      <img
+        class="!rounded-2xl md:rounded-none"
+        [src]="'assets/profile-images/profile_' + profile!.id + '.jpg'"
+        [alt]="profile!.name"
+        loading="lazy"
+      />
+      <ion-row
+        class="flex flex-col gap-1 p-4 rounded-2xl display last:md:absolute bottom-3 h-44 justify-center w-full bg-white"
+      >
+        <span class="text-xl font-bold">{{ profile!.name }}</span>
+        <span
+          >{{ profile!.age }} Yrs, {{ profile!.height }},
+          {{ profile!.motherTongue }}, {{ profile!.caste }}</span
+        >
+        <span
+          >{{ profile!.professional }}, {{ profile!.grade }},
+          {{ profile!.city }}</span
+        >
+        <span>{{ profile!.state }}, {{ profile!.country }}</span>
+      </ion-row>
+    </ion-card-content>
+  </ion-col>
+</ion-content>
+}

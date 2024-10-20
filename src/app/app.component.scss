@@ -1,0 +1,9 @@
+.modal {
+  background-image: linear-gradient(
+    rgba(204, 155, 221, 0) 0%,
+    rgba(188, 150, 202, 0.81) 17%,
+    #883da1 117%
+  );
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+}

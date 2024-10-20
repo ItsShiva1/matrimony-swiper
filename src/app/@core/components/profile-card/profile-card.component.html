@@ -1,0 +1,143 @@
+<div class="h-full w-full">
+  <div
+    class="flex items-center justify-center md:boundary relative"
+    [ngClass]="type === 'Swipe' ? '' : 'gap-3 h-full overflow-auto'"
+  >
+    @for (card of cards; track $index; let i = $index;) {
+    <div
+      class="stacked-card flex"
+      [ngClass]="type === 'Swipe' ? 'absolute' : ''"
+      [ngStyle]="{
+        zIndex: cards.length - i,
+        transform: 'rotate(' + card.rotation + 'deg)'
+      }"
+      [style.top]="getCardTop(i)"
+      [class.top-card]="i === 0"
+      cdkDrag
+      (cdkDragMoved)="onDrag($event, card)"
+      (cdkDragEnded)="onDragEnd($event, i, card)"
+      cdkDragBoundary=".boundary"
+    >
+      <mat-card class="swipe-card rounded-2xl w-80 h-[34rem] flex">
+        <mat-card-content class="!p-0">
+          <img
+            [src]="'assets/profile-images/profile_' + card.id + '.jpg'"
+            [alt]="card.name"
+            loading="lazy"
+            (click)="navigateProfile(card)"
+          />
+          <div class="flex flex-col gap-1 p-4">
+            <span class="text-xl font-bold">{{ card.name }}</span>
+            <span
+              >{{ card.age }} Yrs, {{ card.height }}, {{ card.motherTongue }},
+              {{ card.caste }}</span
+            >
+            <span
+              >{{ card.professional }}, {{ card.grade }}, {{ card.city }}</span
+            >
+            <span>{{ card.state }}, {{ card.country }}</span>
+            @if(type === 'Card'){
+            <div class="flex flex-row gap-4">
+              <button mat-raised-button (click)="navigateProfile(card)">
+                Yes
+              </button>
+              <button mat-raised-button (click)="interested(card)">No</button>
+            </div>
+            } @if(type === 'Swipe'){
+            <div class="w-full flex flex-row justify-around items-center gap-4">
+              <div class="flex flex-row justify-center items-center gap-1">
+                <span
+                  class="material-symbols-outlined"
+                  [ngStyle]="{ color: card.shortListed ? 'gold' : '' }"
+                  (click)="shortListed(card)"
+                >
+                  star
+                </span>
+                <span class="text-sm">Shortlist</span>
+              </div>
+              <span class="flex flex-row justify-center items-center gap-2">
+                <span class="text-sm font-bold">Like her?</span>
+                <button mat-mini-fab (click)="notInterested(card)">
+                  <mat-icon>close</mat-icon>
+                </button>
+                <button mat-mini-fab (click)="interested(card)">
+                  <mat-icon>check</mat-icon>
+                </button>
+              </span>
+            </div>
+            }
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    }
+  </div>
+</div>
+<!-- <ion-content class="h-full w-full">
+  <div class="card-stack flex items-center justify-center boundary">
+    <div
+      *ngFor="let card of cards; let i = index"
+      class="stacked-card flex"
+      [ngStyle]="{
+        zIndex: cards.length - i,
+        transform: 'rotate(' + card.rotation + 'deg)'
+      }"
+      [style.top]="getCardTop(i)"
+      [class.top-card]="i === 0"
+      cdkDrag
+      (cdkDragMoved)="onDrag($event, card)"
+      (cdkDragEnded)="onDragEnd($event, i, card)"
+      cdkDragBoundary=".boundary"
+      (click)="navigateProfile(card)"
+    >
+      <ion-card class="swipe-card rounded-2xl w-80 h-[34rem] flex">
+        <ion-card-content class="!p-0">
+          <img
+            [src]="'assets/profile-images/profile_' + card.id + '.jpg'"
+            [alt]="card.name"
+            loading="lazy"
+          />
+          <div class="flex flex-col gap-1 p-4">
+            <span class="text-xl font-bold">{{ card.name }}</span>
+            <span
+              >{{ card.age }} Yrs, {{ card.height }}, {{ card.motherTongue }},
+              {{ card.caste }}</span
+            >
+            <span
+              >{{ card.professional }}, {{ card.grade }}, {{ card.city }}</span
+            >
+            <span>{{ card.state }}, {{ card.country }}</span>
+
+            <div *ngIf="type === 'Match'" class="flex flex-row gap-4">
+              <ion-button (click)="navigateProfile(card)">Yes</ion-button>
+              <ion-button>No</ion-button>
+            </div>
+
+            <div
+              *ngIf="type === 'Swipe'"
+              class="w-full flex flex-row justify-around items-center gap-4"
+            >
+              <div class="flex flex-row justify-center items-center gap-1">
+                <ion-icon
+                  name="star"
+                  [ngStyle]="{ color: card.shortListed ? 'gold' : '' }"
+                  (click)="shortListed(card)"
+                ></ion-icon>
+                <span class="text-sm">Shortlist</span>
+              </div>
+              <div class="flex flex-row justify-center items-center gap-2">
+                <span class="text-sm font-bold">Like her?</span>
+                <ion-button size="small" (click)="notInterested(card)">
+                  <ion-icon name="close"></ion-icon>
+                </ion-button>
+                <ion-button size="small" (click)="interested(card)">
+                  <ion-icon name="checkmark"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content> -->
